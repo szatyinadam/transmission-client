@@ -3,7 +3,9 @@ package main
 import "log"
 
 func main() {
-	torrents := GetTorrents()
+	config := Config{}
+	ReadConfig(&config)
+	torrents := GetTorrents(&config.Transmission)
 
 	for index, name := range torrents {
 		log.Printf("%d %s", index, name)

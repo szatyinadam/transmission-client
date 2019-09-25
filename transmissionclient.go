@@ -57,6 +57,11 @@ func GetTorrents(transmission *Transmission) []string {
 	if err := json.Unmarshal([]byte(string(body)), &responseBody); err != nil {
 		panic(err)
 	}
-	log.Println(responseBody)
-	return []string{}
+	torrents := responseBody.Arguments["torrents"].([]interface{})
+	var list []string
+	for _, torrent := range torrents {
+		torrentName := (torrent.(map[string]interface{}))["name"].(string)
+		list = append(list, torrentName)
+	}
+	return list
 }

@@ -10,4 +10,5 @@ func main() {
 	for index, name := range torrents {
 		log.Printf("%d %s", index, name)
 	}
+	Consume(&config.Sqs)
 }

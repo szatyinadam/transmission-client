@@ -3,8 +3,7 @@ package main
 import "log"
 
 func main() {
-	config := Config{}
-	ReadConfig(&config)
+	config := ReadConfig()
 	torrents := GetTorrents(&config.Transmission)
 
 	for index, name := range torrents {

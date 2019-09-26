@@ -22,14 +22,16 @@ type Config struct {
 	Sqs          Sqs          `yaml:"sqs"`
 }
 
-func ReadConfig(config *Config) {
+func ReadConfig() *Config {
 	f, err := os.Open("config/config.yml")
 	if err != nil {
 		log.Fatalln(err)
 	}
 	decoder := yaml.NewDecoder(f)
+	config := &Config{}
 	err = decoder.Decode(config)
 	if err != nil {
 		log.Fatalln(err)
 	}
+	return config
 }

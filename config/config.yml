@@ -1,2 +1,7 @@
 transmission:
   url: http://192.168.0.238:9091/transmission/rpc
+sqs:
+  queue-url: https://sqs.us-east-1.amazonaws.com/356329984695/transmission.fifo
+  region: us-east-1
+  credential-path: /Users/adam/.aws/credentials
+  credential-profile: default

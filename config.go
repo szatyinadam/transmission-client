@@ -10,8 +10,16 @@ type Transmission struct {
 	Url string `yaml:"url"`
 }
 
+type Sqs struct {
+	QueueUrl          string `yaml:"queue-url"`
+	Region            string `yaml:"region"`
+	CredentialPath    string `yaml:"credential-path"`
+	CredentialProfile string `yaml:"credential-profile"`
+}
+
 type Config struct {
 	Transmission Transmission `yaml:"transmission"`
+	Sqs          Sqs          `yaml:"sqs"`
 }
 
 func ReadConfig(config *Config) {

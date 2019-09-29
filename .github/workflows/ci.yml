@@ -20,6 +20,7 @@ jobs:
           go get -t -d ./...
           go get github.com/golang/mock/gomock
           go get github.com/golang/mock/mockgen
+          which gomock
 
       - name: Test
         run: |

@@ -17,8 +17,8 @@ jobs:
 
       - name: Get dependencies
         run: |
-          go get -v github.com/golang/mock/gomock
-          go get -v github.com/golang/mock/mockgen
+          GOBIN=$PWD/bin go get -v github.com/golang/mock/gomock
+          GOBIN=$PWD/bin go get -v github.com/golang/mock/mockgen
           go get -v -t -d ./...
           ls -alh
           ls -alh $GOROOT/bin
@@ -28,7 +28,7 @@ jobs:
           which go
           export
           ls $GOROOT/bin
-          $GOROOT/bin/mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
+          ./bin/mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
           go test
 
       - name: Build

@@ -15,6 +15,7 @@ type Sqs struct {
 	Region            string `yaml:"region"`
 	CredentialPath    string `yaml:"credential-path"`
 	CredentialProfile string `yaml:"credential-profile"`
+	MaxMessages       int64  `yaml:"max-messages"`
 }
 
 type Config struct {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
 )
@@ -20,12 +21,12 @@ func TestReadConfig(t *testing.T) {
 				Region:            "us-east-1",
 				CredentialPath:    "/Users/adam/.aws/credentials",
 				CredentialProfile: "default",
+				MaxMessages:       5,
 			},
 		},
 	}
 	t.Run(test.name, func(t *testing.T) {
-		if got := ReadConfig(); !reflect.DeepEqual(got, test.want) {
-			t.Errorf("ReadConfig() = %v, want %v", got, test.want)
-		}
+		config := ReadConfig()
+		assert.True(t, reflect.DeepEqual(config, test.want))
 	})
 }

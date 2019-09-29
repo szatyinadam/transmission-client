@@ -5,3 +5,4 @@ sqs:
   region: us-east-1
   credential-path: /Users/adam/.aws/credentials
   credential-profile: default
+  max-messages: 5

@@ -20,7 +20,7 @@ jobs:
 
       - name: Test
         run: |
-          mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
+          $GOPATH/bin/mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
           go test
 
       - name: Build

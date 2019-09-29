@@ -17,11 +17,12 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Get dependencies
-        run: |
-          go get -t -d ./...
+        run: go get -t -d ./...
 
       - name: Test
-        run: go test
+        run: |
+          mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
+          go test
 
       - name: Build
         run: go build .

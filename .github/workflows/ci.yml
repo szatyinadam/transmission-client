@@ -20,14 +20,9 @@ jobs:
           GOBIN=$PWD/bin go get -v github.com/golang/mock/gomock
           GOBIN=$PWD/bin go get -v github.com/golang/mock/mockgen
           go get -v -t -d ./...
-          ls -alh
-          ls -alh $GOROOT/bin
 
       - name: Test
         run: |
-          which go
-          export
-          ls $GOROOT/bin
           ./bin/mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
           go test
 

@@ -17,9 +17,9 @@ jobs:
 
       - name: Get dependencies
         run: |
-          go get -t -d ./...
-          go get github.com/golang/mock/gomock
-          go get github.com/golang/mock/mockgen
+          go get -v github.com/golang/mock/gomock
+          go get -v github.com/golang/mock/mockgen
+          go get -v -t -d ./...
           which gomock
 
       - name: Test

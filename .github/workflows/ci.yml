@@ -20,6 +20,8 @@ jobs:
 
       - name: Test
         run: |
+          which go
+          export
           $GOROOT/bin/mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
           go test
 

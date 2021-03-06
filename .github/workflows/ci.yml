@@ -4,9 +4,9 @@ jobs:
 
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
-      - name: Set up Go 1.13
+      - name: Set up Go 1.16
         uses: actions/setup-go@v1
         with:
           go-version: 1.16
@@ -17,14 +17,12 @@ jobs:
 
       - name: Get dependencies
         run: |
-          GOBIN=$PWD/bin go get -v github.com/golang/mock/gomock
-          GOBIN=$PWD/bin go get -v github.com/golang/mock/mockgen
-          go get -v -t -d ./...
+          GOBIN=$PWD/bin go install github.com/golang/mock/mockgen@v1.5.0
+          ./bin/mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
+          go get -v -t
 
       - name: Test
-        run: |
-          ./bin/mockgen -destination mock/mock_sqsclient.go github.com/aws/aws-sdk-go/service/sqs/sqsiface SQSAPI
-          go test
+        run: go test
 
       - name: Build
         run: go build .

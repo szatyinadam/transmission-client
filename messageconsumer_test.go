@@ -1,12 +1,12 @@
 package main
 
 import (
-	"./mock"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
 	"testing"
+	"transmission-client/mock"
 )
 
 func TestReceive(t *testing.T) {

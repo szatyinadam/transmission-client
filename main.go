@@ -7,6 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/sqs"
 	"github.com/aws/aws-sdk-go/service/sqs/sqsiface"
 	"log"
+	"net/http"
 )
 
 func main() {
@@ -21,16 +22,24 @@ func main() {
 }
 
 func processMessage(messageChannel chan *sqs.Message, config *Config, sqsService sqsiface.SQSAPI) {
+	transmissionClient := TransmissionClient{
+		config:     &config.Transmission,
+		httpClient: &http.Client{},
+	}
 	for message := range messageChannel {
 		log.Println(message)
-		for index, name := range GetTorrents(&config.Transmission) {
+		torrents, err := transmissionClient.GetTorrents()
+		if err != nil {
+			log.Fatal(err)
+		}
+		for index, name := range torrents {
 			log.Printf("%d %s", index, name)
 		}
 		DeleteReceivedMessages(sqsService, &config.Sqs, message)
 	}
 }
 
-func createSqsService(sqsConfig *Sqs) sqsiface.SQSAPI {
+func createSqsService(sqsConfig *SqsConfig) sqsiface.SQSAPI {
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String(sqsConfig.Region),
 		Credentials: credentials.NewSharedCredentials(sqsConfig.CredentialPath, sqsConfig.CredentialProfile),

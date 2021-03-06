@@ -7,7 +7,7 @@ import (
 	"log"
 )
 
-func PollSqs(chanel chan<- *sqs.Message, sqsService sqsiface.SQSAPI, sqsConfig *Sqs) {
+func PollSqs(chanel chan<- *sqs.Message, sqsService sqsiface.SQSAPI, sqsConfig *SqsConfig) {
 	receiveParams := &sqs.ReceiveMessageInput{
 		QueueUrl:            &sqsConfig.QueueUrl,
 		MaxNumberOfMessages: aws.Int64(sqsConfig.MaxMessages),
@@ -28,7 +28,7 @@ func Receive(sqsService sqsiface.SQSAPI, receiveParams *sqs.ReceiveMessageInput,
 	}
 }
 
-func DeleteReceivedMessages(sqsService sqsiface.SQSAPI, sqsConfig *Sqs, message *sqs.Message) {
+func DeleteReceivedMessages(sqsService sqsiface.SQSAPI, sqsConfig *SqsConfig, message *sqs.Message) {
 	deleteParams := &sqs.DeleteMessageInput{
 		QueueUrl:      aws.String(sqsConfig.QueueUrl),
 		ReceiptHandle: message.ReceiptHandle,

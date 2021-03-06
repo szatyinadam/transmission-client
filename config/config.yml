@@ -1,5 +1,7 @@
 transmission:
   url: http://192.168.0.238:9091/transmission/rpc
+  username: transmission
+  password: password
 sqs:
   queue-url: https://sqs.us-east-1.amazonaws.com/356329984695/transmission.fifo
   region: us-east-1

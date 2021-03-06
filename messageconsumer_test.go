@@ -70,7 +70,7 @@ func TestDeleteReceivedMessages(t *testing.T) {
 			DeleteMessage(gomock.Any()).
 			Times(1).
 			Return(nil, nil)
-		config := Sqs{QueueUrl: "abc"}
+		config := SqsConfig{QueueUrl: "abc"}
 
 		DeleteReceivedMessages(mockSqsService, &config, createMessage())
 	})

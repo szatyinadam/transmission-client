@@ -6,11 +6,13 @@ import (
 	"os"
 )
 
-type Transmission struct {
-	Url string `yaml:"url"`
+type TransmissionConfig struct {
+	Url      string `yaml:"url"`
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
 }
 
-type Sqs struct {
+type SqsConfig struct {
 	QueueUrl          string `yaml:"queue-url"`
 	Region            string `yaml:"region"`
 	CredentialPath    string `yaml:"credential-path"`
@@ -19,8 +21,8 @@ type Sqs struct {
 }
 
 type Config struct {
-	Transmission Transmission `yaml:"transmission"`
-	Sqs          Sqs          `yaml:"sqs"`
+	Transmission TransmissionConfig `yaml:"transmission"`
+	Sqs          SqsConfig          `yaml:"sqs"`
 }
 
 func ReadConfig() *Config {

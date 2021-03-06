@@ -13,10 +13,12 @@ func TestReadConfig(t *testing.T) {
 	}{
 		name: "Load config",
 		want: &Config{
-			Transmission: Transmission{
-				Url: "http://192.168.0.238:9091/transmission/rpc",
+			Transmission: TransmissionConfig{
+				Url:      "http://192.168.0.238:9091/transmission/rpc",
+				Username: "transmission",
+				Password: "password",
 			},
-			Sqs: Sqs{
+			Sqs: SqsConfig{
 				QueueUrl:          "https://sqs.us-east-1.amazonaws.com/356329984695/transmission.fifo",
 				Region:            "us-east-1",
 				CredentialPath:    "/Users/adam/.aws/credentials",
